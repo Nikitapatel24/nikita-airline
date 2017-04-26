@@ -1,0 +1,96 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="./bootstrap.css">
+
+    <!-- jQuery library -->
+    <script src="./jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="./bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container-fluid" style="background-color: aliceblue;">
+        <div class="container">
+            <div class="page-header">
+                <h1>Airlines</h1>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <%
+                        if (Session["userName"] != null)
+                        {
+                            Response.Write("Welcome.. " + Session["userName"].ToString());
+                        }
+                        %>
+
+                </div>
+                <div class="col-md-4" style="float:right;">
+                     <%
+                         if (Session["userName"] == null)
+                         {
+                             Response.Write("<a href=\"Login.aspx\">Passenger Login</a>&nbsp;|&nbsp;");
+                             Response.Write("<a href=\"Register.aspx\">Register</a>&nbsp;|&nbsp;");
+                             Response.Write("<a href=\"StaffLogin.aspx\">Admin Login</a>");
+                         }
+                         else
+                         {
+                             if (Session["userType"] == "admin")
+                             {
+                                 Response.Write("<a href=\"Flights.aspx\">Manage Flights</a>&nbsp;|&nbsp;");
+                                 Response.Write("<a href=\"Bookings.aspx\">Manage Bookings</a>&nbsp;|&nbsp;");
+                                 Response.Write("<a href=\"Logout.aspx\">Log Out</a>&nbsp;");
+                             }
+                             else
+                             {
+                                 Response.Write("<a href=\"Bookings.aspx\">My Bookings</a>&nbsp;|&nbsp;");
+                                 Response.Write("<a href=\"Logout.aspx\">Log Out</a>&nbsp;");
+                             }
+                         }
+                        %>
+                    
+        
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-3" style="text-align:center;">
+                   <a href="Default.aspx" type="button" class="btn btn-danger" style="width:100px;">Home</a>
+                </div>
+                <div class="col-md-3" style="text-align:center;">
+                   <a href="Flights.aspx" type="button" class="btn btn-danger" style="width:100px;">Flights</a>
+                </div>
+                <div class="col-md-3" style="text-align:center;">
+                   <a href="About.aspx" type="button" class="btn btn-danger" style="width:100px;">About</a>
+                </div>
+                <div class="col-md-3" style="text-align:center;">
+                    <a href="Contact.aspx" type="button" class="btn btn-danger" style="width:100px;">Contact</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" style="height:100%;">
+                    <form id="form1" runat="server">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </form>
+                </div>
+            </div>
+            <footer>
+        <p>
+            Copyright @ 2016 Nikita Patel P14159751
+        </p>
+    </footer>
+        </div>
+    </div>
+    
+    
+</body>
+</html>
